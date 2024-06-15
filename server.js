@@ -3,6 +3,11 @@ const qs = require('qs');
 require('dotenv').config();
 const app = express();
 const port = 3000;
+const baseUrl = 'https://api.themoviedb.org/3';
+const API_URL = `${baseUrl}/movie/popular?language=ko-KR&page=1&region=KR`;
+
+
+const token = process.env.TOKEN;
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -13,24 +18,24 @@ app.use((req, res, next) => {
   next();
 });
 
-const apiKey = process.env.API_KEY;
-const baseUrl = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json';
-
 app.get('/movies', async (req, res) => {
-  const query = qs.stringify({
-    key: apiKey,
-    targetDt: req.query.targetDt || '20230314'
-  });
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  };
 
-  const url = `${baseUrl}?${query}`;
-
-  const fetch = (await import('node-fetch')).default;
-  const response = await fetch(url);
-  const data = await response.json();
-
-  // 반환되는 데이터의 구조를 확인하고 필요한 경우 수정합니다.
-  const result = data.boxOfficeResult?.dailyBoxOfficeList || [];
-  res.json({ result });
+  try {
+    const response = await fetch(API_URL, options);
+    const data = await response.json();
+    console.log(data); // 데이터를 로그로 출력하여 확인
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
 });
 
 app.listen(port, () => {
