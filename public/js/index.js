@@ -56,4 +56,4 @@ function moviePoster() {
     .catch(error => console.error('Error fetching movies:', error));
 }
 
-moviePoster()
+// moviePoster()
