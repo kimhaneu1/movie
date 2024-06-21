@@ -1,5 +1,9 @@
 const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/original';
 
+function goToMovieDetail(movieId) {
+  window.location.href = `moviedetail.html?id=${movieId}`; // index2.html로 이동하면서 movieId를 쿼리 파라미터로 전달
+}
+
 function moviePoster() {
   fetch('/movies')
     .then(response => response.json()) // 응답을 JSON으로 파싱
@@ -9,7 +13,7 @@ function moviePoster() {
       if (json.results && Array.isArray(json.results)) { // 'results'로 수정
         for (let i = 0; i < 4 && i < json.results.length; i++) {
           div.innerHTML += `
-                <div class="poster">
+                <div class="poster" onclick="goToMovieDetail(${json.results[i].id})">
                   <img src="${IMAGE_BASE_URL}${json.results[i].poster_path}" class="poster-img-top" alt="...">
                   <div class="poster-body">
                     <h5 class="poster-title">${json.results[i].title}</h5>
@@ -25,3 +29,4 @@ function moviePoster() {
 }
 
 moviePoster()
+

@@ -33,3 +33,7 @@ h5 {
   font-family: cursive;
   font-size: 30px; /* 크기 설정 */
 }
+
+.navbar-toggler {
+  order: -1;
+}
