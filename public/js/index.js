@@ -1,7 +1,7 @@
 const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/original';
 
 function goToMovieDetail(movieId) {
-  window.location.href = `moviedetail.html?id=${movieId}`; // index2.html로 이동하면서 movieId를 쿼리 파라미터로 전달
+  window.location.href = `moviedetail.html?id=${movieId}`; // moviedetail.html로 이동하면서 movieId를 쿼리 파라미터로 전달
 }
 
 function moviePoster() {

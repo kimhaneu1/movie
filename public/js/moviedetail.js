@@ -6,7 +6,7 @@ if (movieId) {
         .then(response => response.json())
         .then(data => {
             console.log(data); // 가져온 데이터를 콘솔에 출력
-            const movieDetailDiv = document.getElementById('#movie-detail');
+            const movieDetailDiv = document.getElementById('movie-detail');
             movieDetailDiv.innerHTML = `
     <h2>${data.title}</h2>
     <p>${data.overview}</p>
