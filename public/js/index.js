@@ -10,7 +10,7 @@ function moviePoster() {
     .then(json => {
       const div = document.querySelector('.poster-group');
       div.innerHTML = '';
-      if (json.results && Array.isArray(json.results)) { // 'results'로 수정
+      if (json.results && Array.isArray(json.results)) {
         for (let i = 0; i < 4 && i < json.results.length; i++) {
           div.innerHTML += `
                 <div class="poster" onclick="goToMovieDetail(${json.results[i].id})">
