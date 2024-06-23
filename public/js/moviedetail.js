@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const movieId = params.get('id');
 
 if (movieId) {
-    fetch(`/movies?id=${movieId}`) // 서버에서 영화 정보를 가져오는 엔드포인트로 요청
+    fetch(`/movies/id?id=${movieId}`) // 서버에서 영화 정보를 가져오는 엔드포인트로 요청
         .then(response => response.json())
         .then(data => {
             console.log(data); // 가져온 데이터를 콘솔에 출력
